@@ -1,4 +1,5 @@
 import express from "express";
+import { getUserProfile } from "../controllers/userController.js";
 
 const router = express.Router();
 
@@ -14,6 +15,6 @@ router.get("/check-auth", (req, res) => {
   }
 });
 
-
+router.get("/user/:id", getUserProfile);
 
 export default router;
