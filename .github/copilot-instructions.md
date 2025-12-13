@@ -2,38 +2,30 @@
 
 ## Architecture Overview
 
-This is a MERN-based job portal with Auth0 authentication. The project has a **monorepo structure** with separate `client/` (currently empty) and `server/` directories.
+MERN-based job portal with Auth0 authentication. **Monorepo structure**: `client/` (empty placeholder) + `server/` (active backend).
 
-**Server Stack**: Express.js (ES Modules), MongoDB (Mongoose), Auth0 (express-openid-connect)
+**Stack**: Express 5.x (ES Modules) + MongoDB (Mongoose 9.x) + Auth0 (`express-openid-connect`)
 
-**Key Flow**: Auth0 handles authentication → users are synced to MongoDB → API routes handle business logic
+**Auth Flow**: Auth0 login → callback to `/` → user synced to MongoDB via `enusureUserInDB()` → redirect to `CLIENT_URL`
 
-## Critical Setup & Development
+**Data Model**: Two entities (User, Job) with cross-references via ObjectId refs. Users track `appliedJobs[]` and `savedJobs[]`, Jobs track `applicants[]` and `likes[]`.
+
+## Development Workflows
 
 ### Running the Server
 ```bash
 cd server
-npm start  # Uses nodemon for hot-reload
+npm start  # Nodemon with hot-rtteload (runs server.js)
 ```
 
-### Environment Variables (server/.env)
-Required variables:
-- `SECRET`, `BASE_URL`, `CLIENT_ID`, `ISSUER_BASE_URL` - Auth0 configuration
-- `MONGO_URI` - MongoDB connection string (currently MongoDB Atlas)
-- `CLIENT_URL` - Frontend origin for CORS and redirects
-- `PORT` - Server port (default: 8000)
+### Environment Setup (server/.env)
+Required Auth0 config: `SECRET`, `BASE_URL`, `CLIENT_ID`, `ISSUER_BASE_URL`  
+Required MongoDB: `MONGO_URI` (MongoDB Atlas connection string)  
+Required CORS: `CLIENT_URL` (frontend origin for redirects)  
+Optional: `PORT` (defaults to 8000)
 
-**Note**: `.env` file contains actual credentials and should NOT be committed to git.
-
-## Code Patterns & Conventions
-
-### ES Modules (Not CommonJS)
-- Use `import/export` syntax throughout
-- `package.json` has `"type": "module"`
-- File extensions required in imports: `import connect from "./db/connect.js"`
-
-### Route Auto-Discovery
-Routes are **dynamically loaded** from `server/routes/` using filesystem scanning:
+### Route Auto-Discovery Mechanism
+Routes are **dynamically imported** from `server/routes/` at startup:
 ```javascript
 fs.readdirSync("./routes").forEach((file) => {
   import(`./routes/${file}`).then((route) => {
@@ -41,53 +33,105 @@ fs.readdirSync("./routes").forEach((file) => {
   });
 });
 ```
-**Important**: All route files must export a router as `default` and are prefixed with `/api/v1/`
+**Critical**: All route files must `export default router` - they're auto-prefixed with `/api/v1/`
 
-### Auth0 Integration Pattern
-- `express-openid-connect` middleware provides `req.oidc` object
-- Check authentication: `req.oidc.isAuthenticated()`
-- Access user: `req.oidc.user` (contains `sub`, `email`, `name`, `picture`)
-- Root route (`/`) handles Auth0 callback and syncs users to MongoDB via `enusureUserInDB()`
+## Code Conventions
 
-### User Model & Roles
-- Users have two roles: `"jobseeker"` (default) or `"recruiter"`
-- `auth0Id` field stores Auth0's `sub` claim (unique identifier)
-- User schema includes job references: `appliedJobs[]`, `savedJobs[]` (both ref to `Job` model)
-- Auto-timestamps enabled via `{ timestamps: true }`
+### ES Modules (Strict)
+- ALL files use `import/export` syntax (no CommonJS)
+- `package.json` specifies `"type": "module"`
+- **File extensions required**: `import User from "./models/UserModel.js"` (must include `.js`)
+
+### Authentication Patterns
+
+**Middleware**: `protect.js` checks `req.oidc.isAuthenticated()` before allowing access
+```javascript
+// Apply to protected routes (see jobRoutes.js)
+router.post("/jobs", protect, createJob);
+```
+
+**Controller Pattern**: Fetch user from DB via Auth0 ID
+```javascript
+const user = await User.findOne({ auth0Id: req.oidc.user.sub });
+```
+
+**Auth Check Endpoint**: `GET /api/v1/check-auth` returns `{ isAuthenticated, user }` or `false`
 
 ### Error Handling
-- Uses `express-async-handler` for async route handlers
-- Avoids try-catch boilerplate in routes
+- Controllers use `express-async-handler` wrapper (see `jobController.js`)
+- Controllers have **manual try-catch** blocks (async-handler used inconsistently)
+- Return structured errors: `res.status(400).json({ message: "..." })`
+
+### Mongoose Model Patterns
+- Timestamps via `{ timestamps: true }` in all schemas
+- ObjectId references use `ref: "ModelName"` for population
+- Default exports: `export default mongoose.model("User", userSchema)`
+
+## Key Components
+
+### User Model (`models/UserModel.js`)
+- `auth0Id` (unique): Primary identifier from Auth0's `sub` claim
+- `role`: enum `["jobseeker", "recruiter"]` (default: `jobseeker`)
+- `appliedJobs[]`, `savedJobs[]`: refs to Job model
+- Optional fields: `resume`, `bio`, `profession`, `profilePicture`
+
+### Job Model (`models/JobModel.js`)
+- Required: `title`, `description`, `salary`, `jobType[]`, `skills[]`
+- Arrays: `tags[]`, `applicants[]` (User refs), `likes[]` (User refs)
+- `createdBy`: User ref (recruiter who posted job)
+- `salaryType` default: `"Year"`, `negotiable` default: `false`
+
+### Job Routes (`routes/jobRoutes.js`)
+All routes protected except `GET /jobs` and `GET /jobs/search`:
+- `POST /jobs` - Create job (requires `protect`)
+- `GET /jobs/user/:id` - Get jobs by user ID
+- `PUT /jobs/apply/:id` - Apply to job
+- `PUT /jobs/like/:id` - Like/unlike job
+- `DELETE /jobs/:id` - Delete job
+
+### Controllers Logic
+**jobController.js**: Manual validation before DB operations (checks for required fields, returns 400 if missing)  
+**userController.js**: Lookup by `auth0Id` (not MongoDB `_id`)  
+**Note**: `asycHandler` typo in userController (should be `asyncHandler`)
 
 ## Common Tasks
 
-### Adding New Routes
-1. Create file in `server/routes/` (e.g., `jobRoutes.js`)
-2. Export Express router as default:
-   ```javascript
-   import express from "express";
-   const router = express.Router();
-   router.get("/jobs", (req, res) => { /* ... */ });
-   export default router;
-   ```
-3. Auto-loaded on server restart (no manual registration needed)
-
-### Adding New Models
-1. Create in `server/models/` following Mongoose schema pattern
-2. Export model: `export default mongoose.model("ModelName", schema)`
-3. Import where needed (see `UserModel.js` for reference)
-
-### Checking Auth in Routes
+### Adding a New Route
+1. Create file in `server/routes/` (e.g., `companyRoutes.js`)
+2. Structure:
 ```javascript
-if (req.oidc.isAuthenticated()) {
-  const user = req.oidc.user; // Auth0 user object
-  // Your logic here
-}
+import express from "express";
+import { getCompanies } from "../controllers/companyController.js";
+import protect from "../middleware/protect.js";
+
+const router = express.Router();
+router.get("/companies", protect, getCompanies);
+export default router; // REQUIRED - auto-mounted to /api/v1/
+```
+3. Restart server (nodemon will auto-detect new file)
+
+### Adding a New Model
+1. Create in `server/models/` (e.g., `CompanyModel.js`)
+2. Follow pattern:
+```javascript
+import mongoose from "mongoose";
+
+const companySchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  // ... fields
+}, { timestamps: true }); // Always include timestamps
+
+export default mongoose.model("Company", companySchema);
 ```
 
-## Known Issues & Notes
+### Working with Auth0 Users
+**In routes/middleware**: Access via `req.oidc.user` (contains `sub`, `email`, `name`, `picture`)  
+**In controllers**: Resolve to DB user via `User.findOne({ auth0Id: req.oidc.user.sub })`  
+**Public profile lookup**: Use `/api/v1/user/:id` where `:id` is Auth0 ID (not MongoDB `_id`)
 
-- **Missing Server Call**: The `server()` function is defined but called at line 101 - ensure this line exists
-- **Client folder is empty**: Frontend not yet implemented
-- **CORS configured** for `CLIENT_URL` with credentials support
-- **MongoDB connection**: Uses Mongoose with basic error handling in `db/connect.js`
+## Project Status
+
+- **Frontend**: `client/` folder exists but is empty (no React/frontend code yet)
+- **Database**: MongoDB Atlas cloud instance (connection string in `.env`)
+- **Auth**: Auth0 fully configured with callback handling and user sync
+- **API**: RESTful endpoints for jobs and users operational
