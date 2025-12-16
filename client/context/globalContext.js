@@ -7,8 +7,8 @@ import React, {
 } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-const GlobalContext = createContext();
 
+const GlobalContext = createContext();
 
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
@@ -18,6 +18,21 @@ export const GlobalContextProvider = ({ children }) => {
   const [auth0User, setAuth0User] = useState(null);
   const [userProfile, setUserProfile] = useState({});
   const [loading, setLoading] = useState(false);
+
+  // input state
+  const [jobTitle, setJobTitle] = useState("");
+  const [jobDescription, setJobDescription] = useState("");
+  const [salary, setSalary] = useState(0);
+  const [activeEmploymentTypes, setActiveEmploymentTypes] = useState([]);
+  const [salaryType, setSalaryType] = useState("Year");
+  const [negotiable, setNegotiable] = useState(false);
+  const [tags, setTags] = useState([]);
+  const [skills, setSkills] = useState([]);
+  const [location, setLocation] = useState({
+    country: "",
+    city: "",
+    address: "",
+  });
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -37,7 +52,7 @@ export const GlobalContextProvider = ({ children }) => {
     checkAuth();
   }, []);
 
-    const getUserProfile = async (id) => {
+  const getUserProfile = async (id) => {
     try {
       const res = await axios.get(`/api/v1/user/${id}`);
 
@@ -47,13 +62,41 @@ export const GlobalContextProvider = ({ children }) => {
     }
   };
 
-    useEffect(() => {
-      if(isAuthenticated && auth0User){
-        getUserProfile(auth0User.sub);
-      }
-    }, [isAuthenticated, auth0User]);
+  // handle input change
+  const handleTitleChange = (e) => {
+    setJobTitle(e.target.value.trimStart());
+  };
 
-    
+  const handleDescriptionChange = (e) => {
+    setJobDescription(e.target.value.trimStart());
+  };
+
+  const handleSalaryChange = (e) => {
+    setSalary(e.target.value);
+  };
+
+  const resetJobForm = () => {
+    setJobTitle("");
+    setJobDescription("");
+    setSalary(0);
+    setActiveEmploymentTypes([]);
+    setSalaryType("Year");
+    setNegotiable(false);
+    setTags([]);
+    setSkills([]);
+    setLocation({
+      country: "",
+      city: "",
+      address: "",
+    });
+  };
+
+  useEffect(() => {
+    if (isAuthenticated && auth0User) {
+      getUserProfile(auth0User.sub);
+    }
+  }, [isAuthenticated, auth0User]);
+
   return (
     <GlobalContext.Provider
       value={{
@@ -62,7 +105,21 @@ export const GlobalContextProvider = ({ children }) => {
         userProfile,
         getUserProfile,
         loading,
-      }}>
+        jobTitle,
+        jobDescription,
+        salary,
+        activeEmploymentTypes,
+        salaryType,
+        negotiable,
+        tags,
+        skills,
+        location,
+        handleTitleChange,
+        handleDescriptionChange,
+        handleSalaryChange,
+        
+      }}
+    >
       {children}
     </GlobalContext.Provider>
   );
