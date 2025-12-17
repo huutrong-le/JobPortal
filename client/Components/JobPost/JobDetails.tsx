@@ -23,18 +23,21 @@ function MyEditor() {
   const { setJobDescription, jobDescription } = useGlobalContext();
 
   return (
-    <ReactQuill
-      value={jobDescription}
-      onChange={setJobDescription}
-      style={{
-        minHeight: "400px",
-        maxHeight: "900px",
-      }}
-      modules={{
-        toolbar: true,
-      }}
-      className="custom-quill-editor"
-    />
+    <div className="flex-1 overflow-hidden">
+      <ReactQuill
+        value={jobDescription}
+        onChange={setJobDescription}
+        style={{
+          minHeight: "200px",
+          maxHeight: "400px",
+          overflow: "auto",
+        }}
+        modules={{
+          toolbar: true,
+        }}
+        className="custom-quill-editor"
+      />
+    </div>
   );
 }
 
