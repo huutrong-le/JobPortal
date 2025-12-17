@@ -171,11 +171,11 @@ export const JobsContextProvider = ({ children }) => {
     }
   };
 
-  //
+  //handle search change
   const handleSearchChange = (searchName, value) => {
     setSearchQuery((prev) => ({ ...prev, [searchName]: value }));
   };
-
+  // handle filter change
   const handleFilterChange = (filterName) => {
     setFilters((prev) => ({ ...prev, [filterName]: !prev[filterName] }));
   };
@@ -191,6 +191,7 @@ export const JobsContextProvider = ({ children }) => {
     }
   }, [userProfile._id]);
 
+// context provider  
   return (
     <JobsContext.Provider
       value={{
