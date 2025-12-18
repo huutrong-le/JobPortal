@@ -22,7 +22,7 @@ function JobForm() {
   } = useGlobalContext();
   const { createJob } = useJobsContext();
 
-  const sections = ["About", "Job Details", "Skills", "Location", "Summary"];
+  const sections = ["Giới thiệu", "Chi tiết", "Kỹ năng", "Địa điểm", "Tóm tắt"];
   const [currentSection, setCurrentSection] = React.useState(sections[0]);
 
   const handleSectionChange = (section: string) => {
@@ -31,34 +31,34 @@ function JobForm() {
 
   const renderStages = () => {
     switch (currentSection) {
-      case "About":
+      case "Giới thiệu":
         return <JobTitle />;
-      case "Job Details":
+      case "Chi tiết":
         return <JobDetails />;
-      case "Skills":
+      case "Kỹ năng":
         return <JobSkills />;
-      case "Location":
+      case "Địa điểm":
         return <JobLocation />;
     }
   };
 
   const getCompletedColor = (section: string) => {
     switch (section) {
-      case "About":
+      case "Giới thiệu":
         return jobTitle && activeEmploymentTypes.length > 0
-          ? "bg-[#7263F3] text-white"
+          ? "bg-[#0866FF] text-white"
           : "bg-gray-300";
-      case "Job Details":
+      case "Chi tiết":
         return jobDescription && salary > 0
-          ? "bg-[#7263F3] text-white"
+          ? "bg-[#0866FF] text-white"
           : "bg-gray-300";
-      case "Skills":
+      case "Kỹ năng":
         return skills.length && tags.length > 0
-          ? "bg-[#7263F3] text-white"
+          ? "bg-[#0866FF] text-white"
           : "bg-gray-300";
-      case "Location":
+      case "Địa điểm":
         return location.address || location.city || location.country
-          ? "bg-[#7263F3] text-white"
+          ? "bg-[#0866FF] text-white"
           : "bg-gray-300";
       default:
         return "bg-gray-300";
@@ -93,7 +93,7 @@ function JobForm() {
             className={`pl-4 py-3 relative flex self-start items-center gap-2 font-medium 
                 ${
                   currentSection === section
-                    ? "text-[#7263F3]"
+                    ? "text-[#0866FF]"
                     : "text-gray-500"
                 }
                 `}
@@ -109,7 +109,7 @@ function JobForm() {
             </span>
             {section}
             {currentSection === section && (
-              <span className="w-1 h-full absolute left-0 top-0 bg-[#7263F3] rounded-full"></span>
+              <span className="w-1 h-full absolute left-0 top-0 bg-[#0866FF] rounded-full"></span>
             )}
           </button>
         ))}
@@ -123,26 +123,26 @@ function JobForm() {
         {renderStages()}
 
         <div className="flex justify-end gap-4 mt-4">
-          {currentSection !== "Summary" && (
+          {currentSection !== "Tóm tắt" && (
             <button
               type="button"
-              className="px-6 py-2 bg-[#7263F3] text-white rounded-md"
+              className="px-6 py-2 bg-[#0866FF] text-white rounded-md"
               onClick={() => {
                 const currentIndex = sections.indexOf(currentSection);
 
                 setCurrentSection(sections[currentIndex + 1]);
               }}
             >
-              Next
+              Tiếp theo
             </button>
           )}
 
-          {currentSection === "Summary" && (
+          {currentSection === "Tóm tắt" && (
             <button
               type="submit"
-              className="self-end px-6 py-2 bg-[#7263F3] text-white rounded-md"
+              className="self-end px-6 py-2 bg-[#0866FF] text-white rounded-md"
             >
-              Post Job
+              Đăng công việc
             </button>
           )}
         </div>

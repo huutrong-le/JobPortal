@@ -95,7 +95,7 @@ function page() {
               </div>
               <button
                 className={`text-2xl  ${
-                  isLiked ? "text-[#7263f3]" : "text-gray-400"
+                  isLiked ? "text-[#0866FF]" : "text-gray-400"
                 }`}
                 onClick={() => {
                   isAuthenticated
@@ -138,22 +138,22 @@ function page() {
               </p>
 
               <p className="flex-1 py-2 px-4 flex flex-col items-center justify-center gap-1 bg-purple-500/20 rounded-xl">
-                <span className="text-sm">Posted</span>
+                <span className="text-sm">Đăng ngày</span>
                 <span className="font-bold">{formatDates(createdAt)}</span>
               </p>
 
               <p className="flex-1 py-2 px-4 flex flex-col items-center justify-center gap-1 bg-blue-500/20 rounded-xl">
-                <span className="text-sm">Applicants</span>
+                <span className="text-sm">Người nộp đơn</span>
                 <span className="font-bold">{applicants.length}</span>
               </p>
 
               <p className="flex-1 py-2 px-4 flex flex-col items-center justify-center gap-1 bg-yellow-500/20 rounded-xl">
-                <span className="text-sm">Job Type</span>
+                <span className="text-sm">Loại công việc</span>
                 <span className="font-bold">{jobType[0]}</span>
               </p>
             </div>
 
-            <h2 className="font-bold text-2xl mt-2">Job Description</h2>
+            <h2 className="font-bold text-2xl mt-2">Mô tả công việc</h2>
           </div>
 
           <div
@@ -164,8 +164,8 @@ function page() {
 
         <div className="w-[26%] flex flex-col gap-8">
           <button
-            className={`text-white py-4 rounded-full hover:bg-[#7263f3]/90 hover:text-white ${
-              isApplied ? "bg-green-500" : "bg-[#7263f3]"
+            className={`text-white py-4 rounded-full hover:bg-[#0866FF]/90 hover:text-white ${
+              isApplied ? "bg-green-500" : "bg-[#0866FF]"
             }`}
             onClick={() => {
               if (isAuthenticated) {
@@ -184,16 +184,16 @@ function page() {
           </button>
 
           <div className="p-6 flex flex-col gap-2 bg-white rounded-md">
-            <h3 className="text-lg font-semibold">Other Information</h3>
+            <h3 className="text-lg font-semibold">Thông tin khác</h3>
 
             <div className="flex flex-col gap-2">
               <p>
-                <span className="font-bold">Posted:</span>{" "}
+                <span className="font-bold">Đăng ngày:</span>{" "}
                 {formatDates(createdAt)}
               </p>
 
               <p>
-                <span className="font-bold">Salary negotiable: </span>
+                <span className="font-bold">Lương thương lượng: </span>
                 <span
                   className={`${
                     negotiable ? "text-green-500" : "text-red-500"
@@ -204,18 +204,18 @@ function page() {
               </p>
 
               <p>
-                <span className="font-bold">Location:</span> {location}
+                <span className="font-bold">Địa điểm:</span> {location}
               </p>
 
               <p>
-                <span className="font-bold">Job Type:</span> {jobType[0]}
+                <span className="font-bold">Loại công việc:</span> {jobType[0]}
               </p>
             </div>
           </div>
 
           <div className="p-6 flex flex-col gap-2 bg-white rounded-md">
             <h3 className="text-lg font-semibold">Tags</h3>
-            <p>Other relevant tags for the job position.</p>
+            <p>Các thẻ liên quan khác cho vị trí công việc.</p>
 
             <div className="flex flex-wrap gap-4">
               {job.tags.map((tag: string, index: number) => (
@@ -230,17 +230,17 @@ function page() {
           </div>
 
           <div className="p-6 flex flex-col gap-2 bg-white rounded-md">
-            <h3 className="text-lg font-semibold">Skills</h3>
+            <h3 className="text-lg font-semibold">Kỹ năng</h3>
             <p>
-              This is a full-time position. The successful candidate will be
-              responsible for the following:
+              Đây là vị trí toàn thời gian. Ứng viên thành công sẽ chịu trách nhiệm về các nhiệm vụ sau:
+            
             </p>
 
             <div className="flex flex-wrap gap-4">
               {job.tags.map((tag: string, index: number) => (
                 <span
                   key={index}
-                  className="px-4 py-1 rounded-full text-sm font-medium flex items-center bg-indigo-500/20 text-[#7263f3]"
+                  className="px-4 py-1 rounded-full text-sm font-medium flex items-center bg-indigo-500/20 text-[#0866FF]"
                 >
                   {tag}
                 </span>

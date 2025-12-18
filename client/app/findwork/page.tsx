@@ -47,9 +47,9 @@ function page() {
     <main>
       <Header />
 
-      <div className="relative px-16 bg-[#D7DEDC] overflow-hidden">
+      <div className="relative px-16 bg-[#E3F2FF] overflow-hidden">
         <h1 className="py-8 text-black font-bold text-3xl">
-          Find Your Next Job Here
+          Tìm kiếm công việc mơ ước của bạn
         </h1>
 
         <div className="pb-8 relative z-10">
@@ -75,7 +75,7 @@ function page() {
 
       <div className="w-[90%] mx-auto mb-14">
         <div className="flex justify-between items-center">
-          <h2 className="text-3xl font-bold text-black py-8">Recent Jobs</h2>
+          <h2 className="text-3xl font-bold text-black py-8">Công việc gần đây</h2>
 
           <button
             onClick={toggleGridColumns}
@@ -83,10 +83,10 @@ function page() {
           >
             <span>
               {columns === 3
-                ? "Grid View"
+                ? "Dạng lưới"
                 : columns === 2
-                ? "Table View"
-                : "List View"}
+                ? "Dạng bảng"
+                : "Dạng danh sách"}
             </span>
             <span className="text-lg">{getIcon()}</span>
           </button>
@@ -110,7 +110,7 @@ function page() {
               ))
             ) : (
               <div className="mt-1 flex items-center">
-                <p className="text-2xl font-bold">No Jobs Found!</p>
+                <p className="text-2xl font-bold">Không tìm thấy công việc!</p>
               </div>
             )}
           </div>

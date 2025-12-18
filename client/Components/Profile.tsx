@@ -48,7 +48,7 @@ function Profile() {
 
         <DropdownMenuItem>
           <Settings className="mr-2 h-4 w-4" />
-          <span>Settings</span>
+          <span>Cài đặt</span>
         </DropdownMenuItem>
         <DropdownMenuItem
           className="cursor-pointer"
@@ -57,7 +57,7 @@ function Profile() {
           }}
         >
           <LogOut className="mr-2 h-4 w-4" />
-          <span>Logout</span>
+          <span>Đăng xuất</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

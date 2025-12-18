@@ -54,9 +54,9 @@ function JobDetails() {
     <div className="p-6 flex flex-col gap-4 bg-background border border-border rounded-lg">
       <div className="grid grid-cols-2 gap-6">
         <div className="flex-1">
-          <h3 className="text-black font-bold">Job Description</h3>
+          <h3 className="text-black font-bold">Mô tả công việc</h3>
           <Label htmlFor="jobDescription" className="text-gray-500 mt-2">
-            Provide a detailed description of the job.
+            Cung cấp mô tả chi tiết về công việc.
           </Label>
         </div>
         <div className="flex-1">
@@ -68,9 +68,9 @@ function JobDetails() {
 
       <div className="relative grid grid-cols-2 gap-6">
         <div>
-          <h3 className="text-black font-bold">Salary</h3>
+          <h3 className="text-black font-bold">Mức lương</h3>
           <Label htmlFor="salary" className="text-gray-500 mt-2">
-            Enter the salary range for the job.
+            Nhập khoảng lương cho công việc.
           </Label>
         </div>
 
@@ -78,7 +78,7 @@ function JobDetails() {
           <Input
             type="number"
             id="salary"
-            placeholder="Enter Salary"
+            placeholder="Nhập mức lương"
             value={salary}
             onChange={handleSalaryChange}
             className="mt-2"
@@ -88,7 +88,7 @@ function JobDetails() {
             <div className="flex items-center space-x-2 border border-gray-300 rounded-md p-2">
               <Checkbox id="negotiable" />
               <Label htmlFor="negotiable" className="text-gray-500">
-                Negotiable
+                Thương lượng
               </Label>
             </div>
             <div className="flex items-center space-x-2 border border-gray-300 rounded-md p-2">
@@ -98,20 +98,20 @@ function JobDetails() {
                 onCheckedChange={setNegotiable}
               />
               <Label htmlFor="hideSalary" className="text-gray-500">
-                Hide Salary
+                Ẩn mức lương
               </Label>
             </div>
 
             <div>
               <Select onValueChange={setSalaryType}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select Type" />
+                  <SelectValue placeholder="Chọn loại" />
                 </SelectTrigger>
                 <SelectContent className="w-[120px] mt-2">
-                  <SelectItem value="Yearly">Yearly</SelectItem>
-                  <SelectItem value="Month">Month</SelectItem>
-                  <SelectItem value="Hour">Hour</SelectItem>
-                  <SelectItem value="Fixed">Fixed</SelectItem>
+                  <SelectItem value="Yearly">Hàng năm</SelectItem>
+                  <SelectItem value="Month">Hàng tháng</SelectItem>
+                  <SelectItem value="Hour">Hàng giờ</SelectItem>
+                  <SelectItem value="Fixed">Cố định</SelectItem>
                 </SelectContent>
               </Select>
             </div>

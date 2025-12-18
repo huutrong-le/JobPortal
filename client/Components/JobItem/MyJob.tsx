@@ -67,7 +67,7 @@ function MyJob({ job }: JobProps) {
         </div>
         <button
           className={`text-2xl ${
-            isLiked ? "text-[#7263f3]" : "text-gray-400"
+            isLiked ? "text-[#0866FF]" : "text-gray-400"
           } `}
           onClick={() => {
             isAuthenticated
@@ -105,7 +105,7 @@ function MyJob({ job }: JobProps) {
             <div className="self-end">
               <Button variant="ghost" size="icon" className="text-gray-500">
                 <Pencil size={14} />
-                <span className="sr-only">Edit job</span>
+                <span className="sr-only">Chỉnh sửa công việc</span>
               </Button>
 
               <Button
@@ -116,7 +116,7 @@ function MyJob({ job }: JobProps) {
                 onClick={() => deleteJob(job._id)}
               >
                 <Trash size={14} />
-                <span className="sr-only">Delete job</span>
+                <span className="sr-only">Xóa công việc</span>
               </Button>
             </div>
           )}

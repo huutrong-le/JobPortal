@@ -21,7 +21,7 @@ function SearchForm() {
           name="title"
           value={searchQuery.title}
           onChange={(e) => handleSearchChange("title", e.target.value)}
-          placeholder="Job Title or Keywords"
+          placeholder="Tiêu đề hoặc từ khóa"
           className="w-full py-7 text-2xl text-black pl-[5rem] rounded-tl-full rounded-bl-full"
         />
         <span>
@@ -40,7 +40,7 @@ function SearchForm() {
           name="location"
           value={searchQuery.location}
           onChange={(e) => handleSearchChange("location", e.target.value)}
-          placeholder="Enter Location"
+          placeholder="Vị trí"
           className="w-full py-7 text-2xl text-black pl-[4rem] rounded-tr-full rounded-br-full"
         />
         <span className="text-gray-400 text-3xl absolute left-6 top-[50%] translate-y-[-50%]">
@@ -50,9 +50,9 @@ function SearchForm() {
 
       <button
         type="submit"
-        className="bg-[#7263F3] hover:bg-[#7263F3]/90 text-white text-2xl px-14 py-2 rounded-full absolute right-2 top-[50%] transform translate-y-[-50%] h-[calc(100%-1rem)]"
+        className="bg-[#0866FF] hover:bg-[#0866FF]/90 text-white text-2xl px-14 py-2 rounded-full absolute right-2 top-[50%] transform translate-y-[-50%] h-[calc(100%-1rem)]"
       >
-        Search
+        Tìm kiếm
       </button>
     </form>
   );

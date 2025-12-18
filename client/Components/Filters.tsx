@@ -53,7 +53,7 @@ function Filters() {
         <div className="w-[22rem] pr-4 space-y-6">
             <div>
                 <div className="flex items-center justify-between">
-                    <h2 className="text-lg font-semibold mb-4">Job Type</h2>
+                    <h2 className="text-lg font-semibold mb-4">Loại hình việc làm</h2>
 
                     <Button
                         variant={"ghost"}
@@ -63,7 +63,7 @@ function Filters() {
                             searchJobs();
                         }}
                     >
-                        Clear All
+                        Xóa tất cả
                     </Button>
                 </div>
                 <div className="space-y-4">
@@ -73,7 +73,7 @@ function Filters() {
                             checked={filters.fullTime}
                             onCheckedChange={() => handleFilterChange("fullTime")}
                         />
-                        <Label htmlFor="fullTime">Full Time</Label>
+                        <Label htmlFor="fullTime">Toàn thời gian</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                         <Checkbox
@@ -81,7 +81,7 @@ function Filters() {
                             checked={filters.partTime}
                             onCheckedChange={() => handleFilterChange("partTime")}
                         />
-                        <Label htmlFor="partTime">Part Time</Label>
+                        <Label htmlFor="partTime">Bán thời gian</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                         <Checkbox
@@ -89,7 +89,7 @@ function Filters() {
                             checked={filters.contract}
                             onCheckedChange={() => handleFilterChange("contract")}
                         />
-                        <Label htmlFor="contract">Contract</Label>
+                        <Label htmlFor="contract">Hợp đồng</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                         <Checkbox
@@ -97,7 +97,7 @@ function Filters() {
                             checked={filters.internship}
                             onCheckedChange={() => handleFilterChange("internship")}
                         />
-                        <Label htmlFor="internship">Internship</Label>
+                        <Label htmlFor="internship">Thực tập</Label>
                     </div>
                 </div>
             </div>
@@ -142,9 +142,9 @@ function Filters() {
             </div>
 
             <div>
-                <h2 className="text-lg font-semibold mb-4">Salary Range</h2>
+                <h2 className="text-lg font-semibold mb-4">Khoảng lương</h2>
                 <div className="flex flex-col gap-4">
-                    <Label htmlFor="minSalary">Minimum Salary</Label>
+                    <Label htmlFor="minSalary">Mức lương tối thiểu</Label>
                     <Slider
                         id="minSalary"
                         min={0}
@@ -160,7 +160,7 @@ function Filters() {
                 </div>
             </div>
             <div className="flex flex-col gap-4">
-                <Label htmlFor="maxSalary">Maximum Salary</Label>
+                <Label htmlFor="maxSalary">Mức lương tối đa</Label>
                 <Slider
                     id="maxSalary"
                     min={0}

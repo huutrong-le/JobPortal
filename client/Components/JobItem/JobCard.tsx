@@ -68,7 +68,7 @@ function JobCard({ job, activeJob }: JobProps) {
       className={`p-8 rounded-xl flex flex-col gap-5
     ${
       activeJob
-        ? "bg-gray-50 shadow-md border-b-2 border-[#7263f3]"
+        ? "bg-gray-50 shadow-md border-b-2 border-[#0866FF]"
         : "bg-white"
     }`}
     >
@@ -91,14 +91,14 @@ function JobCard({ job, activeJob }: JobProps) {
             <h4 className="group-hover:underline font-bold">{title}</h4>
             <p className="text-xs">
               {name}: {applicants.length}{" "}
-              {applicants.length > 1 ? "Applicants" : "Applicant"}
+              {applicants.length > 1 ? "Ứng viên" : "Ứng viên"}
             </p>
           </div>
         </div>
 
         <button
           className={`text-2xl ${
-            isLiked ? "text-[#7263f3]" : "text-gray-400"
+            isLiked ? "text-[#0866FF]" : "text-gray-400"
           } `}
           onClick={() => {
             isAuthenticated
@@ -150,7 +150,7 @@ function JobCard({ job, activeJob }: JobProps) {
           <span className="text-lg">
             <Calendar size={16} />
           </span>
-          Posted: {formatDates(createdAt)}
+          Đã đăng: {formatDates(createdAt)}
         </p>
       </div>
     </div>

@@ -39,12 +39,12 @@ function JobSkills() {
     <div className="p-6 flex flex-col gap-4 bg-background border border-border rounded-lg">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="flex-1">
-          <h3 className="text-lg font-semibold">Skills</h3>
+          <h3 className="text-lg font-semibold">Kỹ năng</h3>
           <Label
             htmlFor="skills"
             className="text-sm text-muted-foreground mt-2"
           >
-            Add relevant skills for the job position.
+            Thêm các kỹ năng liên quan cho vị trí công việc.
           </Label>
         </div>
 
@@ -56,11 +56,11 @@ function JobSkills() {
               value={newSkill}
               onChange={(e) => setNewSkill(e.target.value)}
               className="flex-1"
-              placeholder="Enter a skill"
+              placeholder="Nhập kỹ năng"
             />
 
             <Button type="button" onClick={handleAddSkill}>
-              Add Skill
+              Thêm kỹ năng
             </Button>
           </div>
 
@@ -90,7 +90,7 @@ function JobSkills() {
         <div className="flex-1">
           <h3 className="text-lg font-semibold">Tags</h3>
           <Label htmlFor="tags" className="text-sm text-muted-foreground mt-2">
-            Add relevant tags for the job position.
+            Thêm các thẻ liên quan cho vị trí công việc.
           </Label>
         </div>
 
@@ -102,10 +102,10 @@ function JobSkills() {
               value={newTag}
               onChange={(e) => setNewTag(e.target.value)}
               className="flex-1"
-              placeholder="Enter a tag"
+              placeholder="Tags"
             />
             <Button type="button" onClick={handleAddTag}>
-              Add Tag
+              Thêm thẻ
             </Button>
           </div>
           <div className="flex flex-wrap gap-2 mt-2">

@@ -43,35 +43,35 @@ function page() {
             className={`border border-gray-400 px-8 py-2 rounded-full font-medium
           ${
             activeTab === "posts"
-              ? "border-transparent bg-[#7263F3] text-white"
+              ? "border-transparent bg-[#0866FF] text-white"
               : "border-gray-400"
           }`}
             onClick={() => setActiveTab("posts")}
           >
-            My Job Posts
+            Công việc đã đăng
           </button>
           <button
             className={`border border-gray-400 px-8 py-2 rounded-full font-medium
           ${
             activeTab === "likes"
-              ? "border-transparent bg-[#7263F3] text-white"
+              ? "border-transparent bg-[#0866FF] text-white"
               : "border-gray-400"
           }`}
             onClick={() => setActiveTab("likes")}
           >
-            Liked Jobs
+            Công việc đã thích
           </button>
         </div>
 
         {activeTab === "posts" && userJobs.length === 0 && (
           <div className="mt-8 flex items-center">
-            <p className="text-2xl font-bold">No job posts found.</p>
+            <p className="text-2xl font-bold">Không tìm thấy bài đăng công việc nào.</p>
           </div>
         )}
 
         {activeTab === "likes" && likedJobs.length === 0 && (
           <div className="mt-8 flex items-center">
-            <p className="text-2xl font-bold">No liked jobs found.</p>
+            <p className="text-2xl font-bold">Không tìm thấy công việc đã thích.</p>
           </div>
         )}
 

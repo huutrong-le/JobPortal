@@ -26,42 +26,42 @@ import { title } from "process";
 export default function Home() {
   const features = [
     {
-      icon: <Briefcase className="w-6 h-6 text-[#7263f3]" />,
-      title: "Diverse Opportunities",
+      icon: <Briefcase className="w-6 h-6 text-[#0866FF]" />,
+      title: "Cơ hội đa dạng",
       description:
-        "Access thousands of job listings across various industries and experience levels.",
+        "Tiếp cận hàng ngàn tin tuyển dụng trên nhiều ngành nghề và cấp độ kinh nghiệm khác nhau.",
       benefits: [
-        "100,000+ active job listings",
-        "50+ job categories",
-        "Remote and on-site options",
+        "100,000+ tin tuyển dụng đang hoạt động",
+        "50+ danh mục công việc",
+        "Tùy chọn làm việc từ xa và tại chỗ",
       ],
-      cta: "Explore Jobs",
+      cta: "Khám phá công việc",
       ctaLink: "/findwork",
     },
     {
-      icon: <Building className="w-6 h-6 text-[#7263f3]" />,
-      title: "Top Companies",
+      icon: <Building className="w-6 h-6 text-[#0866FF]" />,
+      title: "Các công ty hàng đầu",
       description:
-        "Connect with leading companies, from innovative startups to Fortune 500 corporations.",
+        "Kết nối với các công ty hàng đầu, từ các startup sáng tạo đến các tập đoàn Fortune 500.",
       benefits: [
-        "500+ verified employers",
-        "Exclusive partnerships",
-        "Direct application process",
+        "500+ nhà tuyển dụng đã được xác minh",
+        "Quan hệ đối tác độc quyền",
+        "Quy trình ứng tuyển trực tiếp",
       ],
-      cta: "View Companies",
+      cta: "Xem công ty",
       ctaLink: "/findwork",
     },
     {
-      icon: <Users className="w-6 h-6 text-[#7263f3]" />,
-      title: "Talent Pool",
+      icon: <Users className="w-6 h-6 text-[#0866FF]" />,
+      title: "Nguồn nhân lực",
       description:
-        "Employers can access a diverse pool of qualified candidates for their open positions.",
+        "Nhà tuyển dụng có thể truy cập vào một nguồn ứng viên đa dạng và đủ điều kiện cho các vị trí tuyển dụng của họ.",
       benefits: [
-        "1M+ registered job seekers",
-        "Advanced search filters",
-        "AI-powered matching",
+        "1M+ người tìm việc đã đăng ký",
+        "Bộ lọc tìm kiếm nâng cao",
+        "Phù hợp được hỗ trợ bởi AI",
       ],
-      cta: "Post a Job",
+      cta: "Đăng tuyển dụng",
       ctaLink: "/post",
     },
   ];
@@ -70,13 +70,13 @@ export default function Home() {
     <main>
       <Header />
 
-      <section className="py-20 bg-gradient-to-b from-[#d7dedc] to-[#7263f3]/5 text-primary-foreground">
+      <section className="py-20 bg-gradient-to-b from-[#E3F2FF] to-[#F0F7FF] text-primary-foreground">
         <div className="container mx-auto px-4 text-center text-black">
-          <h1 className="text-4xl text-[#7263f3] md:text-5xl font-bold mb-6">
-            Find Your Dream Job or Perfect Candidate
+          <h1 className="text-4xl text-[#0866FF] md:text-5xl font-bold mb-6">
+            Tìm kiếm công việc mơ ước hoặc ứng viên hoàn hảo
           </h1>
           <p className="text-xl mb-8">
-            Connect with thousands of employers and job seekers on our platform
+            Kết nối với hàng ngàn nhà tuyển dụng và người tìm việc trên nền tảng của chúng tôi
           </p>
           <div className="max-w-2xl mx-auto flex gap-4">
             <Input
@@ -84,19 +84,19 @@ export default function Home() {
               placeholder="Job title or keyword"
               className="flex-grow bg-white text-black"
             />
-            <Button className="bg-[#7263f3] text-white">
+            <Button className="bg-[#0866FF] text-white">
               <SearchIcon className="w-6 h-6" />
-              Search Jobs
+              Tìm kiếm công việc
             </Button>
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-[#f0f5fa]">
+      <section className="py-20 bg-[#F0F7FF]">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">
-            Why Choose{" "}
-            <span className="text-[#7263f3] font-extrabold">JobFindr</span>
+            Tại sao chọn{" "}
+            <span className="text-[#0866FF] font-extrabold">JobFindr</span>
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -139,22 +139,22 @@ export default function Home() {
               variant={"outline"}
               className="text-sm font-medium border-gray-400"
             >
-              Trusted by 10,000+ companies worldwide
+              Được tin cậy bởi hơn 10.000 công ty trên toàn thế giới
             </Badge>
           </div>
         </div>
       </section>
 
-      <section className="py-[7rem] bg-[#d7dedc]">
+      <section className="py-[7rem] bg-[#E3F2FF]">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-8">Ready to Get Started?</h2>
+          <h2 className="text-3xl font-bold mb-8">Sẵn sàng bắt đầu?</h2>
 
           <div className="flex flex-col md:flex-row justify-center gap-4">
             <Button size={"lg"} asChild>
-              <Link href={"/findwork"}>Find Work</Link>
+              <Link href={"/findwork"}>Tìm việc</Link>
             </Button>
             <Button size={"lg"} variant={"outline"} asChild>
-              <Link href={"/post"}>Post a Job</Link>
+              <Link href={"/post"}>Đăng việc</Link>
             </Button>
           </div>
         </div>

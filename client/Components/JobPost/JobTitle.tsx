@@ -8,11 +8,11 @@ import { Input } from "../ui/input";
 import { Checkbox } from "../ui/checkbox";
 
 interface EmployementTypeProps {
-  "Full Time": string;
-  "Part Time": string;
-  Contract: boolean;
-  Internship: boolean;
-  Temporary: boolean;
+  "Toàn thời gian": string;
+  "Bán thời gian": string;
+  "Hợp đồng": boolean;
+  "Thực tập": boolean;
+  "Tạm thời": boolean;
 }
 
 function JobTitle() {
@@ -21,11 +21,11 @@ function JobTitle() {
 
   const [employmentTypes, setEmploymentTypes] =
     React.useState<EmployementTypeProps>({
-      "Full Time": "",
-      "Part Time": "",
-      Contract: false,
-      Internship: false,
-      Temporary: false,
+      "Toàn thời gian": "",
+      "Bán thời gian": "",
+      "Hợp đồng": false,
+      "Thực tập": false,
+      "Tạm thời": false,
     });
 
   const handleEmploymentTypeChange = (type: keyof EmployementTypeProps) => {
@@ -44,12 +44,12 @@ function JobTitle() {
     <div className="p-6 flex flex-col gap-4 bg-background border border-border rounded-lg">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="flex-1">
-          <h3 className="text-lg font-semibold">Job Title</h3>
+          <h3 className="text-lg font-semibold">Tiêu đề công việc</h3>
           <Label
             htmlFor="jobTitle"
             className="text-sm text-muted-foreground mt-2"
           >
-            A job title is a specific designation of a post in an organization.
+            Tiêu đề công việc là một chỉ định cụ thể của một vị trí trong tổ chức.
           </Label>
         </div>
         <Input
@@ -58,7 +58,7 @@ function JobTitle() {
           value={jobTitle}
           onChange={handleTitleChange}
           className="flex-1 w-full mt-2"
-          placeholder="Enter Job Title"
+          placeholder="Nhập tiêu đề công việc"
         />
       </div>
 
@@ -66,12 +66,12 @@ function JobTitle() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="flex-1">
-          <h3 className="text-lg font-semibold">Employment Type</h3>
+          <h3 className="text-lg font-semibold">Loại hình việc làm</h3>
           <Label
             htmlFor="employmentType"
             className="text-sm text-muted-foreground mt-2"
           >
-            Select the type of employment.
+            Chọn loại hình việc làm.
           </Label>
         </div>
         <div className="flex-1 flex flex-col gap-2">
