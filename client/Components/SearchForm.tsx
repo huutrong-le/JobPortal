@@ -11,7 +11,7 @@ function SearchForm() {
       className="relative flex items-center"
       onSubmit={(e) => {
         e.preventDefault();
-        searchJobs(searchQuery.tags, searchQuery.location, searchQuery.title);
+        searchJobs("", searchQuery.location, searchQuery.title);
       }}
     >
       <div className="flex-1 relative">

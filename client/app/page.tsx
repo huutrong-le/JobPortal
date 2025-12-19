@@ -13,6 +13,7 @@ import {
 } from "@/Components/ui/card";
 import { Input } from "@/Components/ui/input";
 import { useGlobalContext } from "@/context/globalContext";
+import { useJobsContext } from "@/context/jobsContext";
 import {
   Briefcase,
   Building,
@@ -21,9 +22,28 @@ import {
   Users,
 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { title } from "process";
 
 export default function Home() {
+  const router = useRouter();
+  const { searchJobs, setSearchQuery } = useJobsContext();
+  const [searchInput, setSearchInput] = useState("");
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchInput.trim()) {
+      setSearchQuery({
+        tags: "",
+        location: "",
+        title: searchInput,
+      });
+      searchJobs("", "", searchInput);
+      router.push("/findwork");
+    }
+  };
+
   const features = [
     {
       icon: <Briefcase className="w-6 h-6 text-[#0866FF]" />,
@@ -78,17 +98,19 @@ export default function Home() {
           <p className="text-xl mb-8">
             Kết nối với hàng ngàn nhà tuyển dụng và người tìm việc trên nền tảng của chúng tôi
           </p>
-          <div className="max-w-2xl mx-auto flex gap-4">
+          <form onSubmit={handleSearch} className="max-w-2xl mx-auto flex gap-4">
             <Input
               type="text"
-              placeholder="Job title or keyword"
+              placeholder="Vị trí, kỹ năng, công ty..."
               className="flex-grow bg-white text-black"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
             />
-            <Button className="bg-[#0866FF] text-white">
+            <Button type="submit" className="bg-[#0866FF] text-white">
               <SearchIcon className="w-6 h-6" />
               Tìm kiếm công việc
             </Button>
-          </div>
+          </form>
         </div>
       </section>
 
