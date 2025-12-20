@@ -7,7 +7,8 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "erd": "node scripts/generate-erd.mjs"
   },
   "dependencies": {
     "cookie-parser": "^1.4.7",

@@ -8,12 +8,10 @@ Một ứng dụng web tìm việc làm hiện đại được xây dựng với
 - 🔍 Tìm kiếm công việc theo từ khóa, vị trí, lương
 - 📝 Ứng tuyển công việc trực tuyến
 - ❤️ Lưu công việc yêu thích
-- 👤 Quản lý hồ sơ cá nhân và CV
 - 📊 Theo dõi trạng thái ứng tuyển
 
 ### Dành cho Nhà tuyển dụng
 - ✍️ Đăng tin tuyển dụng
-- 👥 Quản lý danh sách ứng viên
 - 📋 Xem và quản lý công việc đã đăng
 - 🔒 Xác thực bảo mật với Auth0
 
@@ -225,7 +223,6 @@ Dự án sử dụng **Shadcn/ui** components với Radix UI:
 npm run dev    # Chạy dev server (port 3001)
 npm run build  # Build production
 npm start      # Chạy production server
-npm run lint   # ESLint check
 ```
 
 ### Server
